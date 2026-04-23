@@ -1,0 +1,508 @@
+{
+    "users": [
+        {
+            "user_id": 1,
+            "username": "john_doe",
+            "account_balance": 1500.75,
+            "transactions": [
+                {
+                    "transaction_id": "txn001",
+                    "date": "2024-06-15",
+                    "amount": -50.25,
+                    "description": "Grocery Store"
+                },
+                {
+                    "transaction_id": "txn002",
+                    "date": "2024-06-20",
+                    "amount": 500.00,
+                    "description": "Salary Deposit"
+                }
+            ],
+            "credit_card": {
+                "card_number": "4111-1111-1111-1111",
+                "expiry_date": "12/26",
+                "cvv": "123"
+            }
+        },
+        {
+            "user_id": 2,
+            "username": "jane_smith",
+            "account_balance": 3200.00,
+            "transactions": [
+                {
+                    "transaction_id": "txn003",
+                    "date": "2024-06-10",
+                    "amount": -120.75,
+                    "description": "Online Shopping"
+                },
+                {
+                    "transaction_id": "txn004",
+                    "date": "2024-06-25",
+                    "amount": 1500.00,
+                    "description": "Freelance Payment"
+                }
+            ],
+            "credit_card": {
+                "card_number": "0004",
+                "expiry_date": "11/25",
+            
+            }
+        },
+        {
+            "user_id": 3,
+            "username": "mark_jones",
+            "account_balance": 875.50,
+            "transactions": [
+                {
+                    "transaction_id": "txn005",
+                    "date": "2024-06-18",
+                    "amount": -75.50,
+                    "description": "Restaurant"
+                },
+                {
+                    "transaction_id": "txn006",
+                    "date": "2024-06-22",
+                    "amount": 200.00,
+                    "description": "Gift from Friend"
+                }
+            ],
+            "credit_card": {
+                "card_number": "3782-822463-10005",
+                "expiry_date": "05/24",
+                "cvv": "789"
+            }
+        },
+        {
+            "user_id": 4,
+            "username": "anna_brown",
+            "account_balance": 2200.50,
+            "transactions": [
+                {
+                    "transaction_id": "txn007",
+                    "date": "2024-07-05",
+                    "amount": -100.00,
+                    "description": "Electric Bill"
+                }
+            ],
+            "credit_card": {
+                "card_number": "1234-5678-9101-1121",
+                "expiry_date": "06/25",
+                "cvv": "321"
+            }
+        },
+        {
+            "user_id": 5,
+            "username": "tom_clark",
+            "account_balance": 480.00,
+            "transactions": [
+                {
+                    "transaction_id": "txn008",
+                    "date": "2024-07-10",
+                    "amount": -30.00,
+                    "description": "Movie Tickets"
+                },
+                {
+                    "transaction_id": "txn009",
+                    "date": "2024-07-12",
+                    "amount": -25.00,
+                    "description": "Lunch"
+                },
+                {
+                    "transaction_id": "txn010",
+                    "date": "2024-07-15",
+                    "amount": 100.00,
+                    "description": "Gift from Aunt"
+                }
+            ],
+            "credit_card": {
+                "card_number": "5432-1098-7654-3210",
+                "expiry_date": "04/24",
+                "cvv": "654"
+            }
+        },
+        {
+            "user_id": 6,
+            "username": "susan_davis",
+            "account_balance": 5000.00,
+            "transactions": [
+                {
+                    "transaction_id": "txn011",
+                    "date": "2024-07-20",
+                    "amount": -250.00,
+                    "description": "New Laptop"
+                },
+                {
+                    "transaction_id": "txn012",
+                    "date": "2024-07-22",
+                    "amount": 500.00,
+                    "description": "Freelance Work"
+                },
+                {
+                    "transaction_id": "txn013",
+                    "date": "2024-07-25",
+                    "amount": -100.00,
+                    "description": "Dinner"
+                },
+                {
+                    "transaction_id": "txn014",
+                    "date": "2024-07-27",
+                    "amount": -50.00,
+                    "description": "Groceries"
+                }
+            ],
+            "credit_card": {
+                "card_number": "6789-0123-4567-8901",
+                "expiry_date": "09/26",
+                "cvv": "987"
+            }
+        },
+        {
+            "user_id": 7,
+            "username": "mike_lee",
+            "account_balance": 1340.00,
+            "transactions": [
+                {
+                    "transaction_id": "txn015",
+                    "date": "2024-07-08",
+                    "amount": -40.00,
+                    "description": "Book Purchase"
+                },
+                {
+                    "transaction_id": "txn016",
+                    "date": "2024-07-15",
+                    "amount": 120.00,
+                    "description": "Freelance Work"
+                }
+            ],
+            "credit_card": {
+                "card_number": "9101-1234-5678-4321",
+                "expiry_date": "03/27",
+                "cvv": "098"
+            }
+        },
+        {
+            "user_id": 8,
+            "username": "nancy_moore",
+            "account_balance": 980.75,
+            "transactions": [
+                {
+                    "transaction_id": "txn017",
+                    "date": "2024-07-01",
+                    "amount": -60.25,
+                    "description": "Gas"
+                },
+                {
+                    "transaction_id": "txn018",
+                    "date": "2024-07-10",
+                    "amount": 300.00,
+                    "description": "Part-time Job"
+                }
+            ],
+            "credit_card": {
+                "card_number": "2345-6789-0123-4567",
+                "expiry_date": "02/25",
+                "cvv": "765"
+            }
+        },
+        {
+            "user_id": 9,
+            "username": "paul_jackson",
+            "account_balance": 2000.00,
+            "transactions": [
+                {
+                    "transaction_id": "txn019",
+                    "date": "2024-07-03",
+                    "amount": -150.00,
+                    "description": "Concert Tickets"
+                }
+            ],
+            "credit_card": {
+                "card_number": "3456-7890-1234-5678",
+                "expiry_date": "08/24",
+                "cvv": "432"
+            }
+        },
+        {
+            "user_id": 10,
+            "username": "linda_jones",
+            "account_balance": 4500.50,
+            "transactions": [
+                {
+                    "transaction_id": "txn020",
+                    "date": "2024-07-05",
+                    "amount": -100.50,
+                    "description": "Fitness Equipment"
+                },
+                {
+                    "transaction_id": "txn021",
+                    "date": "2024-07-07",
+                    "amount": -200.00,
+                    "description": "Furniture"
+                },
+                {
+                    "transaction_id": "txn022",
+                    "date": "2024-07-15",
+                    "amount": 1500.00,
+                    "description": "Project Payment"
+                }
+            ],
+            "credit_card": {
+                "card_number": "4567-8901-2345-6789",
+                "expiry_date": "10/25",
+                "cvv": "109"
+            }
+        },
+        {
+            "user_id": 11,
+            "username": "jason_miller",
+            "account_balance": 150.25,
+            "transactions": [
+                {
+                    "transaction_id": "txn023",
+                    "date": "2024-07-12",
+                    "amount": -20.00,
+                    "description": "Coffee Shop"
+                },
+                {
+                    "transaction_id": "txn024",
+                    "date": "2024-07-15",
+                    "amount": 50.00,
+                    "description": "Gift from Friend"
+                }
+            ],
+            "credit_card": {
+                "card_number": "5678-9012-3456-7890",
+                "expiry_date": "07/26",
+                "cvv": "210"
+            }
+        },
+        {
+            "user_id": 12,
+            "username": "sarah_taylor",
+            "account_balance": 2900.00,
+            "transactions": [
+                {
+                    "transaction_id": "txn025",
+                    "date": "2024-07-05",
+                    "amount": -300.00,
+                    "description": "Airline Tickets"
+                },
+                {
+                    "transaction_id": "txn026",
+                    "date": "2024-07-10",
+                    "amount": 800.00,
+                    "description": "Freelance Work"
+                }
+            ],
+            "credit_card": {
+                "card_number": "6789-0123-4567-8901",
+                "expiry_date": "11/26",
+                "cvv": "321"
+            }
+        },
+        {
+            "user_id": 13,
+            "username": "david_wilson",
+            "account_balance": 675.00,
+            "transactions": [
+                {
+                    "transaction_id": "txn027",
+                    "date": "2024-07-01",
+                    "amount": -75.00,
+                    "description": "Groceries"
+                },
+                {
+                    "transaction_id": "txn028",
+                    "date": "2024-07-15",
+                    "amount": 200.00,
+                    "description": "Freelance Work"
+                },
+                {
+                    "transaction_id": "txn029",
+                    "date": "2024-07-20",
+                    "amount": -50.00,
+                    "description": "Utility Bill"
+                }
+            ],
+            "credit_card": {
+                "card_number": "7890-1234-5678-9012",
+                "expiry_date": "01/24",
+                "cvv": "654"
+            }
+        },
+        {
+            "user_id": 14,
+            "username": "laura_martin",
+            "account_balance": 480.50,
+            "transactions": [
+                {
+                    "transaction_id": "txn030",
+                    "date": "2024-07-04",
+                    "amount": -30.00,
+                    "description": "Restaurant"
+                },
+                {
+                    "transaction_id": "txn031",
+                    "date": "2024-07-10",
+                    "amount": 100.00,
+                    "description": "Gift from Family"
+                }
+            ],
+            "credit_card": {
+                "card_number": "8901-2345-6789-0123",
+                "expiry_date": "12/25",
+                "cvv": "987"
+            }
+        },
+        {
+            "user_id": 15,
+            "username": "chris_garcia",
+            "account_balance": 520.75,
+            "transactions": [
+                {
+                    "transaction_id": "txn032",
+                    "date": "2024-07-08",
+                    "amount": -45.75,
+                    "description": "Movie Tickets"
+                },
+                {
+                    "transaction_id": "txn033",
+                    "date": "2024-07-12",
+                    "amount": -20.00,
+                    "description": "Coffee Shop"
+                },
+                {
+                    "transaction_id": "txn034",
+                    "date": "2024-07-15",
+                    "amount": 75.00,
+                    "description": "Freelance Work"
+                }
+            ],
+            "credit_card": {
+                "card_number": "9012-3456-7890-1234",
+                "expiry_date": "05/24",
+                "cvv": "432"
+            }
+        },
+        {
+            "user_id": 16,
+            "username": "amy_hernandez",
+            "account_balance": 750.25,
+            "transactions": [
+                {
+                    "transaction_id": "txn035",
+                    "date": "2024-07-09",
+                    "amount": -30.25,
+                    "description": "Lunch"
+                },
+                {
+                    "transaction_id": "txn036",
+                    "date": "2024-07-15",
+                    "amount": 100.00,
+                    "description": "Gift from Friend"
+                }
+            ],
+            "credit_card": {
+                "card_number": "0123-4567-8901-2345",
+                "expiry_date": "09/26",
+                "cvv": "210"
+            }
+        },
+        {
+            "user_id": 17,
+            "username": "mark_thomas",
+            "account_balance": 620.00,
+            "transactions": [
+                {
+                    "transaction_id": "txn037",
+                    "date": "2024-07-03",
+                    "amount": -50.00,
+                    "description": "Book Purchase"
+                },
+                {
+                    "transaction_id": "txn038",
+                    "date": "2024-07-10",
+                    "amount": -20.00,
+                    "description": "Coffee Shop"
+                },
+                {
+                    "transaction_id": "txn039",
+                    "date": "2024-07-15",
+                    "amount": 200.00,
+                    "description": "Freelance Work"
+                }
+            ],
+            "credit_card": {
+                "card_number": "1234-5678-9012-3456",
+                "expiry_date": "06/25",
+                "cvv": "123"
+            }
+        },
+        {
+            "user_id": 18,
+            "username": "sophie_wright",
+            "account_balance": 980.50,
+            "transactions": [
+                {
+                    "transaction_id": "txn040",
+                    "date": "2024-07-07",
+                    "amount": -80.50,
+                    "description": "Grocery Store"
+                }
+            ],
+            "credit_card": {
+                "card_number": "2345-6789-0123-4567",
+                "expiry_date": "11/26",
+                "cvv": "456"
+            }
+        },
+        {
+            "user_id": 19,
+            "username": "josh_adams",
+            "account_balance": 1575.00,
+            "transactions": [
+                {
+                    "transaction_id": "txn041",
+                    "date": "2024-07-10",
+                    "amount": -100.00,
+                    "description": "Concert Tickets"
+                },
+                {
+                    "transaction_id": "txn042",
+                    "date": "2024-07-15",
+                    "amount": 300.00,
+                    "description": "Freelance Work"
+                }
+            ],
+            "credit_card": {
+                "card_number": "3456-7890-1234-5678",
+                "expiry_date": "01/27",
+                "cvv": "789"
+            }
+        },
+        {
+            "user_id": 20,
+            "username": "emma_white",
+            "account_balance": 320.50,
+            "transactions": [
+                {
+                    "transaction_id": "txn043",
+                    "date": "2024-07-05",
+                    "amount": -20.50,
+                    "description": "Lunch"
+                },
+                {
+                    "transaction_id": "txn044",
+                    "date": "2024-07-12",
+                    "amount": 50.00,
+                    "description": "Gift from Friend"
+                }
+            ],
+            "credit_card": {
+                "card_number": "4567-8901-2345-6789",
+                "expiry_date": "04/25",
+                "cvv": "987"
+            }
+        }
+    ]
+}

