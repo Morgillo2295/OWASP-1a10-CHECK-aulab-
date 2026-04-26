@@ -26,13 +26,13 @@ class ArticleController extends Controller
 
     public function search(Request $request){
         
-        // UNSECURE
-        $articles = Article::whereRaw("title like '%{$request->search}%'")->get();
+        // // UNSECURE
+        // $articles = Article::whereRaw("title like '%{$request->search}%'")->get();
 
-        // SECURE
-        // $articles = Article::where('title', 'LIKE', "%{$request->search}%")
-        //                     ->orWhere('content', 'LIKE', "%{$request->search}%")
-        // ->get();
+        //SECURE
+        $articles = Article::where('title', 'LIKE', "%{$request->search}%")
+                            ->orWhere('content', 'LIKE', "%{$request->search}%")
+        ->get();
         
         return view('articles.index',compact('articles'));
     }
