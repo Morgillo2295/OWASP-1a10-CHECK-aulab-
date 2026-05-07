@@ -6,102 +6,153 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-use Intervention\Image\Facades\Image as Image;
-
 
 class UserController extends Controller
 {
-    // UNSECURE
-    public function show($id)
-	{
-		$user = User::findOrFail($id);
+    public function profile()
+    {
+        $user = Auth::user();
 
-        return view('auth.profile',compact('user'));
-	}
+        if (! $user) {
+            return response()->json(['message' => 'Forbidden Operation'], 403);
+        }
 
-    // SECURE
-    // public function profile(){
-    //     if(!$user = Auth::user())
-    //     return response()->json(['message' => 'Forbidden Operation'], 403);
-        
-    //     return view('auth.profile',compact('user'));
-    // }
-
-    public function update(Request $request, $id){
-        $user = User::find($id);
-
-        $user->update($request->all());
-
-        return back()->with('message','User updated');
+        return view('auth.profile', compact('user'));
     }
-    public function changeEmail(Request $request){
-        
-        if(!$user = Auth::user())
-        return response()->json(['message' => 'Forbidden Operation'], 403);
-        
-        $user->email = $request->email;
+
+    public function update(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        $authUser = Auth::user();
+
+        if (! $authUser || ($authUser->id !== $user->id && ! $authUser->isAdmin())) {
+            return response()->json(['message' => 'Forbidden Operation'], 403);
+        }
+
+        $validated = $request->validate([
+            'name' => 'sometimes|string|max:255',
+            'email' => 'sometimes|email|max:255|unique:users,email,' . $user->id,
+        ]);
+
+        if (empty($validated)) {
+            return back()->with('message', 'No data to update');
+        }
+
+        $user->update($validated);
+
+        return back()->with('message', 'User updated');
+    }
+
+    public function changeEmail(Request $request)
+    {
+        $user = Auth::user();
+
+        if (! $user) {
+            return response()->json(['message' => 'Forbidden Operation'], 403);
+        }
+
+        $validated = $request->validate([
+            'email' => 'required|email|max:255|unique:users,email,' . $user->id,
+        ]);
+
+        $user->email = $validated['email'];
         $user->save();
-        
-        return back()->with('message','Changed successfully');
+
+        return back()->with('message', 'Changed successfully');
     }
-    
+
     public function changeName(Request $request)
     {
-        if(!$user = Auth::user())
-        return response()->json(['message' => 'Forbidden Operation'], 403);
-        
-        $user->name = $request->name;
+        $user = Auth::user();
+
+        if (! $user) {
+            return response()->json(['message' => 'Forbidden Operation'], 403);
+        }
+
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        $user->name = $validated['name'];
         $user->save();
-        
-        return back()->with('message','Changed successfully');
+
+        return back()->with('message', 'Changed successfully');
     }
-    
+
     public function changeImg(Request $request)
     {
-        if(!$user = Auth::user()){
-            return back()->with('message','Please Log In');
-        }
-        
-        if(!$request->hasFile('avatar')) {
-            return back()->with('message','Forbidden Operation');
-        }
-        
-        if (!file_exists(storage_path("app/public/images/users/".$user->id))) {
-            mkdir(storage_path("app/public/images/users/".$user->id), 0777, true);
+        $user = Auth::user();
+
+        if (! $user) {
+            return back()->with('message', 'Please Log In');
         }
 
-        // retrieve uploaded image
-        $newImage = $request->file('avatar');
-        // calculate hash
+        $validated = $request->validate([
+            'avatar' => 'required|image|mimes:jpg,jpeg,png,gif|max:5120',
+        ]);
 
-        // UNSECURE with md5
-        $newImageHash = md5_file($newImage);
+        $avatar = $validated['avatar'];
+        $newImageHash = hash_file('sha256', $avatar->getRealPath());
 
-        // SECURE with sha56
-        // $newImageHash = hash_file('sha256', $newImage);
-    
-        // compare hash
-        if($newImageHash == $user->avatar){
-            return redirect()->back()->with('message','Image not updated, same');
+        if ($newImageHash === $user->avatar) {
+            return back()->with('message', 'Image not updated, same');
         }
-        // Define the path to store the image
-        $path = "images/users/".$user->id;
 
-       
-        Storage::deleteDirectory($path);
-    
-        
-        // Store the image in the defined path
-        $filePath = $newImage->storeAs($path, $newImageHash, 'public');
-    
-        // save new user avatar name
-        $user->avatar = $newImageHash;
+        $path = "images/users/{$user->id}";
+        Storage::disk('public')->deleteDirectory($path);
+
+        $filename = $newImageHash . '.' . $avatar->extension();
+        $avatar->storeAs($path, $filename, 'public');
+
+        $user->avatar = $filename;
         $user->save();
 
-        return redirect()->back()->with('message','Image updated');
+        return back()->with('message', 'Image updated');
     }
 
-    public function download(Request $request) {
-        return response()->download(storage_path('app/private/'.$request->get('filename')));
+    public function download(Request $request)
+    {
+        $user = Auth::user();
+
+        if (! $user) {
+            return response()->json(['message' => 'Forbidden Operation'], 403);
+        }
+
+        $allowedFiles = ['privacy.pdf', 'cookie-policy.pdf'];
+        $filename = basename($request->query('filename', ''));
+
+        if (! $filename || ! in_array($filename, $allowedFiles, true)) {
+            return response()->json(['message' => 'Invalid file request'], 400);
+        }
+
+        $fullPath = storage_path('app/private/' . $filename);
+
+        if (! file_exists($fullPath)) {
+            return response()->json(['message' => 'File not found'], 404);
+        }
+
+        return response()->download($fullPath);
+    }
+
+    public function upload(Request $request)
+    {
+        $user = Auth::user();
+
+        if (! $user) {
+            return back()->with('message', 'Please Log In');
+        }
+
+        $validated = $request->validate([
+            'file' => 'required|file|mimes:jpg,jpeg,png,gif,pdf|max:10240',
+        ]);
+
+        $file = $validated['file'];
+        $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
+        $filename = preg_replace('/[^A-Za-z0-9_\-.]/', '_', $filename) . '.' . $file->extension();
+        $path = "private/docs/users/{$user->id}";
+
+        Storage::disk('local')->putFileAs($path, $file, $filename);
+
+        return back()->with('message', 'Upload successful');
     }
 }
