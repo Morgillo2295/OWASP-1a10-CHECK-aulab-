@@ -51,7 +51,7 @@ class AuthController extends Controller
         }
         
         // Accesso fallito
-        return response()->json(['message' => 'Credenziali non valide'], 401);
+        return response()->json(['message' => 'Hey caro, hai sbagliato le credenziali'], 401);
     }
     
 }
