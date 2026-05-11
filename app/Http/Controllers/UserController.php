@@ -143,12 +143,12 @@ class UserController extends Controller
         }
 
         $validated = $request->validate([
-            'file' => 'required|file|mimes:jpg,jpeg,png,gif,pdf|max:10240',
+            'file' => 'required|file|mimes:jpg,jpeg,png,gif,pdf|mimetypes:image/jpeg,image/png,image/gif,application/pdf|max:10240',
         ]);
 
         $file = $validated['file'];
-        $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME);
-        $filename = preg_replace('/[^A-Za-z0-9_\-.]/', '_', $filename) . '.' . $file->extension();
+        $fileHash = hash_file('sha256', $file->getRealPath());
+        $filename = $fileHash . '.' . $file->extension();
         $path = "private/docs/users/{$user->id}";
 
         Storage::disk('local')->putFileAs($path, $file, $filename);
