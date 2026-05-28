@@ -41,13 +41,14 @@
                                             @endif
                                         </td>
                                         <td>
-                                            {{-- UNSECURE --}}
+                                            {{-- UNSECURE
                                             <a href="{{route('admin.articles.toggle',$article->id)}}" class="btn btn-sm {{ $article->published ? 'btn-outline-danger' : 'btn-outline-success' }}">
                                                 @if($article->published)
                                                     <i class="bi bi-x-circle me-1"></i> Unpublish
                                                 @else
                                                     <i class="bi bi-check-circle me-1"></i> Publish
                                                 @endif
+                                                --}}
                                             </a>
                                             {{-- SECURE --}}
                                             {{-- <form action="{{route('articles.toggle',$article->id)}}" method="post" class="d-inline">

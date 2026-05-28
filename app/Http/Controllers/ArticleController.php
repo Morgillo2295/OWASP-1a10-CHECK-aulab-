@@ -111,9 +111,9 @@ class ArticleController extends Controller
     public function destroy(Article $article, Request $request)
     {
         // SECURE
-        // if(Auth::id() !== $article->user_id){
-        //     return redirect()->route('articles.show', $article)->with('message','Not authorized');
-        // }
+        if(Auth::id() !== $article->user_id){
+            return redirect()->route('articles.show', $article)->with('message','Not authorized');
+        }
         
         $article->delete();
         

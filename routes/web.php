@@ -20,9 +20,9 @@ use App\Http\Controllers\CommentController;
 
 Route::get('/', [ArticleController::class, 'index'])->name('home');
 // UNSECURE
-Route::get('/articles/search', [ArticleController::class, 'search'])->name('articles.search');
+// Route::get('/articles/search', [ArticleController::class, 'search'])->name('articles.search');
 // SECURE: throttle:5,1
-// Route::get('/articles/search', [ArticleController::class, 'search'])->middleware('throttle:5,1')->name('articles.search');
+Route::get('/articles/search', [ArticleController::class, 'search'])->middleware('throttle:5,1')->name('articles.search');
 
 Route::middleware(['auth'])->group(function () {
 
@@ -32,9 +32,9 @@ Route::middleware(['auth'])->group(function () {
     Route::put('/articles/{article}', [ArticleController::class, 'update'])->name('articles.update');
     Route::get('/articles/{article}/delete', [ArticleController::class, 'destroy'])->name('articles.destroy');
     // UNSECURE
-    Route::get('/users/{id}',[UserController::class,'show'])->name('profile');
+    // Route::get('/users/{id}',[UserController::class,'show'])->name('profile');
     // SECURE
-    // Route::get('/profile',[UserController::class,'profile'])->name('profile');
+    Route::get('/profile',[UserController::class,'profile'])->name('profile');
 
     Route::patch('/users/{id}/update',[UserController::class,'update'])->name('users.update');
     Route::post('/users/name/change',[UserController::class,'changeName'])->name('change.name');
@@ -44,17 +44,17 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/download-privacy', [UserController::class,'download'])->name('download');
     
     // SECURE
-    //Route::middleware(['admin'])->prefix('dashboard')->group(function () {
+    Route::middleware(['admin'])->prefix('dashboard')->group(function () {
     // UNSECURE
-    Route::prefix('dashboard')->group(function () {
+    // Route::prefix('dashboard')->group(function () {
         Route::get('/', [AdminController::class,'dashboard'])->name('dashboard');
         Route::get('/articles', [AdminController::class,'articles'])->name('admin.articles');
         Route::get('/users', [AdminController::class,'users'])->name('admin.users');
         
-        Route::get('/users/{id}/toggle', [AdminController::class,'toggleUsersAdmin'])->name('admin.users.toggle');
-        Route::get('articles/{id}/toggle',[AdminController::class,'toggleArticleStatus'])->name('admin.articles.toggle');
-        // Route::post('/users/{id}/toggle', [AdminController::class,'toggleUsersAdmin'])->name('admin.users.toggle');
-        // Route::post('/articles/{id}/toggle',[AdminController::class,'toggleArticleStatus'])->name('admin.articles.toggle');
+        // Route::get('/users/{id}/toggle', [AdminController::class,'toggleUsersAdmin'])->name('admin.users.toggle');
+        // Route::get('articles/{id}/toggle',[AdminController::class,'toggleArticleStatus'])->name('admin.articles.toggle');
+        Route::post('/users/{id}/toggle', [AdminController::class,'toggleUsersAdmin'])->name('admin.users.toggle');
+        Route::post('/articles/{id}/toggle',[AdminController::class,'toggleArticleStatus'])->name('admin.articles.toggle');
     });
     // UNSECURE
     // Route::post('/articles/{articleId}/comments', [CommentController::class, 'store'])->name('comments.store');
